@@ -37,6 +37,12 @@ Deploy behind a trusted HTTPS reverse proxy. Set `NODE_ENV=production`, and set 
 
 When using a reverse proxy, set `TRUST_PROXY=true` only if that proxy overwrites `X-Forwarded-For`. Do not expose the app directly to the internet over plain HTTP.
 
+### Pterodactyl Node.js servers
+
+Use a Node.js egg with Node.js 18 or newer and assign a server port in the panel. The app uses the `SERVER_PORT` allocation automatically and binds to `0.0.0.0` in that environment. Set the egg startup command to `npm start` and install the dependencies with `npm ci` (or configure the egg to run it during installation). Upload the project files without `.env`, `node_modules`, or local MySQL data; configure the variables from `.env.example` as private server environment variables in the panel instead.
+
+The MySQL server must be reachable from the Pterodactyl container; `127.0.0.1` refers to the container itself, not a separate database server. For a production deployment, set `NODE_ENV=production`, set `APP_ORIGIN` and `APP_BASE_URL` to the same HTTPS website origin, and put the app behind a trusted HTTPS reverse proxy that supports WebSockets. Do not expose the app directly over plain HTTP.
+
 For Proxmox monitoring, create a least-privilege read-only API token, use a trusted HTTPS certificate, and set `PROXMOX_URL`, `PROXMOX_TOKEN_ID`, and `PROXMOX_TOKEN_SECRET`. The token remains server-side; the dashboard reports a clear configuration state when it is absent.
 
 ## Tests

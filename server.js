@@ -11,8 +11,8 @@ const { WebSocket, WebSocketServer } = require("ws");
 const { hashPassword, verifyPassword, tokenHash, validISODate } = require("./lib/auth");
 
 const root = __dirname;
-const port = Number(process.env.PORT || 8000);
-const host = process.env.HOST || "127.0.0.1";
+const port = Number(process.env.PORT || process.env.SERVER_PORT || 8000);
+const host = process.env.HOST || (process.env.SERVER_PORT ? "0.0.0.0" : "127.0.0.1");
 const sessionDurationMs = 8 * 60 * 60 * 1000;
 const sessionCookie = "votion_session";
 const publicFiles = new Set(["index.html", "styles.css", "app.js"]);
