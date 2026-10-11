@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#100e16">
+    <meta name="description" content="The VOTION CLOUD employee and infrastructure hub.">
+    <title>VOTION CLOUD | Employee hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Main navigation">
+        <a class="brand" href="#home" aria-label="VOTION CLOUD home">
+          <svg class="brand-mark" viewBox="0 0 48 44" aria-hidden="true" focusable="false">
+            <defs>
+              <linearGradient id="logo-face" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#f5f5f7"/>
+                <stop offset=".52" stop-color="#aeb0b5"/>
+                <stop offset="1" stop-color="#e4e5e8"/>
+              </linearGradient>
+              <linearGradient id="logo-shadow" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#73767d"/>
+                <stop offset="1" stop-color="#d8dade"/>
+              </linearGradient>
+            </defs>
+            <path d="M2 3h12l11 22L37 3h9L25 41 2 3Z" fill="url(#logo-face)" stroke="#f3f3f5" stroke-width="1"/>
+            <path d="M3 4h9l12 22-4 4L3 4Zm35 0h7L25 40l-4-7L38 4Z" fill="url(#logo-shadow)" opacity=".8"/>
+            <path d="M17 8h5l9 16-4 4L17 8Zm17 0h5L25 34l-2-4L34 8Z" fill="#24232a" opacity=".65"/>
+          </svg>
+          <span class="brand-name">VOTION<span>CLOUD</span></span>
+        </a>
+
+        <div class="workspace-label">WORKSPACE</div>
+        <nav class="nav-list">
+          <button class="nav-item active" data-page="home"><span class="nav-icon" aria-hidden="true">⌂</span>Home</button>
+          <button class="nav-item" data-page="work"><span class="nav-icon" aria-hidden="true">✓</span>Tasks & tickets<span class="nav-count" id="work-count">4</span></button>
+          <button class="nav-item" data-page="people"><span class="nav-icon" aria-hidden="true">◉</span>People</button>
+          <button class="nav-item" data-page="messages"><span class="nav-icon" aria-hidden="true">▤</span>Messages<span class="nav-count">2</span></button>
+          <button class="nav-item" data-page="calls"><span class="nav-icon" aria-hidden="true">◖</span>Calls</button>
+          <button class="nav-item" data-page="infrastructure"><span class="nav-icon" aria-hidden="true">⌁</span>Infrastructure</button>
+          <button class="nav-item" data-page="resources"><span class="nav-icon" aria-hidden="true">▤</span>Resources</button>
+          <button class="nav-item" data-page="calendar"><span class="nav-icon" aria-hidden="true">▦</span>Calendar</button>
+        </nav>
+
+        <div class="sidebar-bottom">
+          <div class="system-card">
+            <div class="system-top"><span class="status-dot"></span><span>All systems humming</span></div>
+            <span class="system-note">VOTION CLOUD is online</span>
+          </div>
+          <button class="profile-button" data-action="profile">
+            <span class="avatar avatar-me">MC</span>
+            <span class="profile-copy"><strong>Maya Chen</strong><small>Product designer</small></span>
+            <span class="profile-more" aria-hidden="true">···</span>
+          </button>
+        </div>
+      </aside>
+
+      <main class="main-area">
+        <header class="topbar">
+          <label class="search-box">
+            <span aria-hidden="true">⌕</span>
+            <input id="global-search" type="search" placeholder="Search anything..." aria-label="Search this page">
+            <kbd id="search-shortcut">Ctrl K</kbd>
+          </label>
+          <div class="topbar-actions">
+            <span class="today-label" id="today-label"></span>
+            <button class="icon-button notification-button" aria-label="Notifications" data-action="notifications"><span aria-hidden="true">♧</span><i></i></button>
+            <button class="avatar avatar-me top-avatar" aria-label="Your profile" data-action="profile">VC</button>
+            <button class="icon-button" aria-label="Sign out" title="Sign out" data-action="logout">⏻</button>
+          </div>
+        </header>
+
+        <div class="page-content" id="page-content"></div>
+      </main>
+
+      <nav class="mobile-nav" aria-label="Mobile navigation">
+        <button class="mobile-nav-item active" data-page="home"><span aria-hidden="true">⌂</span><small>Home</small></button>
+        <button class="mobile-nav-item" data-page="work"><span aria-hidden="true">✓</span><small>Work</small></button>
+        <button class="mobile-nav-item" data-page="infrastructure"><span aria-hidden="true">⌁</span><small>Cloud</small></button>
+        <button class="mobile-nav-item" data-page="messages"><span aria-hidden="true">▤</span><small>Chat</small></button>
+        <button class="mobile-nav-item" data-page="calls"><span aria-hidden="true">◖</span><small>Calls</small></button>
+        <button class="mobile-nav-item" data-page="people"><span aria-hidden="true">◉</span><small>People</small></button>
+        <button class="mobile-nav-item" data-page="more"><span aria-hidden="true">···</span><small>More</small></button>
+      </nav>
+    </div>
+
+    <dialog class="leave-dialog" id="leave-dialog" aria-labelledby="leave-title">
+      <form id="leave-form" method="dialog">
+        <div class="dialog-heading">
+          <div><span class="eyebrow">TIME AWAY</span><h2 id="leave-title">Request time off</h2></div>
+          <button class="icon-button dialog-close" type="button" aria-label="Close dialog" data-action="close-dialog">×</button>
+        </div>
+        <p class="dialog-intro">Choose the dates you are requesting. Your manager can review the submission.</p>
+        <label class="field-label" for="leave-start">First day</label>
+        <input class="form-input" id="leave-start" type="date" required>
+        <label class="field-label" for="leave-end">Last day</label>
+        <input class="form-input" id="leave-end" type="date" required>
+        <label class="field-label" for="leave-note">Note for your manager <span>(optional)</span></label>
+        <textarea class="form-input" id="leave-note" name="note" rows="3" maxlength="1000" placeholder="Add a little context..."></textarea>
+        <div class="dialog-actions"><button class="button button-quiet" type="button" data-action="close-dialog">Cancel</button><button class="button button-primary" type="submit">Send request <span aria-hidden="true">↗</span></button></div>
+      </form>
+    </dialog>
+
+    <dialog class="leave-dialog form-dialog" id="profile-dialog" aria-labelledby="profile-title">
+      <form id="profile-form">
+        <div class="dialog-heading"><div><span class="eyebrow">YOUR ACCOUNT</span><h2 id="profile-title">Profile details</h2></div><button class="icon-button dialog-close" type="button" aria-label="Close dialog" data-action="close-profile">×</button></div>
+        <p class="dialog-intro">Update your work contact information.</p>
+        <div class="form-grid">
+          <label class="field-label" for="profile-name">Full name<input class="form-input" id="profile-name" name="name" required></label>
+          <label class="field-label" for="profile-email">Work email<input class="form-input" id="profile-email" name="email" type="email" readonly></label>
+          <label class="field-label" for="profile-role">Job title<input class="form-input" id="profile-role" name="role" required></label>
+          <label class="field-label" for="profile-department">Department<input class="form-input" id="profile-department" name="department" required></label>
+          <label class="field-label" for="profile-location">Office / location<input class="form-input" id="profile-location" name="location"></label>
+          <label class="field-label" for="profile-phone">Work phone<input class="form-input" id="profile-phone" name="phone" type="tel"></label>
+          <label class="field-label field-wide" for="profile-manager">Manager<input class="form-input" id="profile-manager" name="manager"></label>
+        </div>
+        <div class="dialog-actions"><button class="button button-quiet" type="button" data-action="close-profile">Cancel</button><button class="button button-outline" type="button" data-action="password-change">Change password</button><button class="button button-primary" type="submit">Save profile</button></div>
+      </form>
+    </dialog>
+
+    <dialog class="leave-dialog form-dialog" id="password-dialog" aria-labelledby="password-title">
+      <form id="password-form">
+        <div class="dialog-heading"><div><span class="eyebrow">ACCOUNT SECURITY</span><h2 id="password-title">Change password</h2></div><button class="icon-button dialog-close" type="button" aria-label="Close dialog" data-action="close-password">×</button></div>
+        <label class="field-label" for="current-password">Current password<input class="form-input" id="current-password" name="currentPassword" type="password" autocomplete="current-password" maxlength="256" required></label>
+        <label class="field-label" for="new-password">New password<input class="form-input" id="new-password" name="newPassword" type="password" autocomplete="new-password" minlength="12" maxlength="256" required><small>Use at least 12 characters.</small></label>
+        <label class="field-label" for="confirm-password">Confirm new password<input class="form-input" id="confirm-password" name="confirmPassword" type="password" autocomplete="new-password" minlength="12" maxlength="256" required></label>
+        <div class="dialog-actions"><button class="button button-quiet" type="button" data-action="close-password">Cancel</button><button class="button button-primary" type="submit">Update password</button></div>
+      </form>
+    </dialog>
+
+    <dialog class="leave-dialog form-dialog" id="invitation-dialog" aria-labelledby="invitation-title">
+      <form id="invitation-form">
+        <div class="dialog-heading"><div><span class="eyebrow">WORKSPACE ADMIN</span><h2 id="invitation-title">Invite a teammate</h2></div><button class="icon-button dialog-close" type="button" aria-label="Close dialog" data-action="close-invitation">×</button></div>
+        <p class="dialog-intro">Create a one-time link that expires in seven days. Share it with the invited employee.</p>
+        <label class="field-label" for="invitation-email">Work email<input class="form-input" id="invitation-email" name="email" type="email" autocomplete="email" required></label>
+        <div class="invitation-result" id="invitation-result" hidden>
+          <label class="field-label" for="invitation-link">Share this link</label>
+          <div class="invitation-link-row"><input class="form-input" id="invitation-link" readonly><button class="button button-outline" type="button" data-action="copy-invitation">Copy</button></div>
+        </div>
+        <div class="dialog-actions"><button class="button button-quiet" type="button" data-action="close-invitation">Close</button><button class="button button-primary" id="create-invitation" type="submit">Create invite link</button></div>
+      </form>
+    </dialog>
+
+    <dialog class="leave-dialog form-dialog" id="share-dialog" aria-labelledby="share-title">
+      <div class="dialog-heading"><div><span class="eyebrow">ACCOUNT SECURITY</span><h2 id="share-title">Password reset link</h2></div><button class="icon-button dialog-close" type="button" aria-label="Close dialog" data-action="close-share">×</button></div>
+      <p class="dialog-intro">Share this one-time password reset link directly with the employee. It expires in one hour.</p>
+      <label class="field-label" for="share-link">Password reset link</label>
+      <div class="invitation-link-row"><input class="form-input" id="share-link" readonly><button class="button button-outline" type="button" data-action="copy-share-link">Copy</button></div>
+      <div class="dialog-actions"><button class="button button-primary" type="button" data-action="close-share">Done</button></div>
+    </dialog>
+
+    <dialog class="leave-dialog form-dialog" id="expense-dialog" aria-labelledby="expense-title">
+      <form id="expense-form">
+        <div class="dialog-heading"><div><span class="eyebrow">EXPENSES</span><h2 id="expense-title">Submit an expense</h2></div><button class="icon-button dialog-close" type="button" aria-label="Close dialog" data-action="close-expense">×</button></div>
+        <p class="dialog-intro">Your submission will be saved as pending for review.</p>
+        <div class="form-grid">
+          <label class="field-label" for="expense-amount">Amount<input class="form-input" id="expense-amount" name="amount" type="number" min="0.01" max="10000000" step="0.01" required></label>
+          <label class="field-label" for="expense-currency">Currency<input class="form-input" id="expense-currency" name="currency" value="USD" minlength="3" maxlength="3" required></label>
+          <label class="field-label field-wide" for="expense-description">Description<textarea class="form-input" id="expense-description" name="description" maxlength="500" rows="3" required></textarea></label>
+        </div>
+        <div class="dialog-actions"><button class="button button-quiet" type="button" data-action="close-expense">Cancel</button><button class="button button-primary" type="submit">Submit expense</button></div>
+      </form>
+    </dialog>
+
+    <dialog class="leave-dialog form-dialog" id="event-dialog" aria-labelledby="event-title">
+      <form id="event-form">
+        <div class="dialog-heading"><div><span class="eyebrow">COMPANY CALENDAR</span><h2 id="event-title">Add an event</h2></div><button class="icon-button dialog-close" type="button" aria-label="Close dialog" data-action="close-event">×</button></div>
+        <label class="field-label" for="event-name">Event name<input class="form-input" id="event-name" name="title" maxlength="180" required></label>
+        <label class="field-label" for="event-start">Date and time<input class="form-input" id="event-start" name="startsAt" type="datetime-local" required></label>
+        <div class="form-grid">
+          <label class="field-label" for="event-location">Location<input class="form-input" id="event-location" name="location" maxlength="200"></label>
+          <label class="field-label" for="event-category">Category<input class="form-input" id="event-category" name="category" maxlength="80" value="Company" required></label>
+        </div>
+        <div class="dialog-actions"><button class="button button-quiet" type="button" data-action="close-event">Cancel</button><button class="button button-primary" type="submit">Publish event</button></div>
+      </form>
+    </dialog>
+
+    <dialog class="leave-dialog form-dialog" id="item-dialog" aria-labelledby="item-title">
+      <form id="item-form">
+        <div class="dialog-heading"><div><span class="eyebrow">WORK BOARD</span><h2 id="item-title">Create work item</h2></div><button class="icon-button dialog-close" type="button" aria-label="Close dialog" data-action="close-item">×</button></div>
+        <label class="field-label" for="item-kind">Type<select class="form-input" id="item-kind" name="kind"><option value="task">Task</option><option value="ticket">Infrastructure ticket</option></select></label>
+        <label class="field-label" for="item-title-input">Title<input class="form-input" id="item-title-input" name="title" maxlength="100" required></label>
+        <label class="field-label" for="item-description">Description<textarea class="form-input" id="item-description" name="description" rows="3" maxlength="500"></textarea></label>
+        <div class="form-grid">
+          <label class="field-label" for="item-assignee">Assignee<select class="form-input" id="item-assignee" name="assignee"></select></label>
+          <label class="field-label" for="item-priority">Priority<select class="form-input" id="item-priority" name="priority"><option>Normal</option><option>High</option><option>Critical</option><option>Low</option></select></label>
+        </div>
+        <div class="dialog-actions"><button class="button button-quiet" type="button" data-action="close-item">Cancel</button><button class="button button-primary" type="submit">Create item</button></div>
+      </form>
+    </dialog>
+
+    <dialog class="leave-dialog person-dialog" id="person-dialog" aria-labelledby="person-title">
+      <div class="dialog-heading"><div><span class="eyebrow">TEAM DIRECTORY</span><h2 id="person-title">Employee details</h2></div><button class="icon-button dialog-close" type="button" aria-label="Close dialog" data-action="close-person">×</button></div>
+      <div id="person-details"></div>
+    </dialog>
+
+    <dialog class="leave-dialog incoming-call-dialog" id="incoming-call-dialog" aria-labelledby="incoming-call-title">
+      <div class="dialog-heading"><div><span class="eyebrow">INCOMING CALL</span><h2 id="incoming-call-title">Someone is calling</h2></div></div>
+      <p class="dialog-intro" id="incoming-call-copy"></p>
+      <div class="dialog-actions">
+        <button class="button button-quiet" type="button" data-action="decline-incoming-call">Decline</button>
+        <button class="button button-primary" type="button" data-action="accept-incoming-call">Accept call</button>
+      </div>
+    </dialog>
+
+    <dialog class="call-dialog" id="call-dialog" aria-labelledby="call-title">
+      <header class="call-dialog-header">
+        <div><span class="eyebrow" id="call-mode-label">TEAM CALL</span><h2 id="call-title">Call</h2></div>
+        <span class="call-duration" id="call-duration">Connecting…</span>
+      </header>
+      <p class="call-status" id="call-status" role="status" aria-live="polite"></p>
+      <div class="call-participants" id="call-participants"></div>
+      <div class="call-controls">
+        <button class="call-control" id="call-mic-button" type="button" data-action="toggle-microphone" aria-pressed="false"><span aria-hidden="true">♩</span><small>Mute</small></button>
+        <button class="call-control" id="call-camera-button" type="button" data-action="toggle-camera" aria-pressed="false"><span aria-hidden="true">▣</span><small>Camera off</small></button>
+        <button class="call-control call-control-end" type="button" data-action="end-call"><span aria-hidden="true">×</span><small>Leave call</small></button>
+      </div>
+      <p class="call-privacy-note">Calls connect directly between teammates. Audio and video are not recorded.</p>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
